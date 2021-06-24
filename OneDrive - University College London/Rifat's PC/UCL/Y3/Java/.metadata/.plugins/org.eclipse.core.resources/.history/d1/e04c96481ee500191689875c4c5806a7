@@ -1,0 +1,87 @@
+package module1;
+
+public class DataTypes {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		///////////////////////task1
+		//// assigning a *double* variable to the value of 5.0
+		double doubVar = 5.0;
+		System.out.println("the value of doubVar is " +doubVar);
+		
+		
+		///////////////////////task2
+		////assigning "float","int","long","byte" variables to the value of 5.0
+		float floatVar = (int) 5.0;
+	    int   intVar = (int) 5.0;
+	    long  longVar = 5;
+	    byte  byteVar = 5;
+	    ///printing the assigned value and names
+	    System.out.println("the value of floatVar is " +floatVar);
+		System.out.println("the value of intVar is "  +intVar);
+		System.out.println("the value of longVar is " +longVar);
+		System.out.println("the value of byteVar is " +byteVar);
+		
+		
+		/////////////////////////task3
+		///////multiplying each of the values by itself and printing the result
+		////double*double
+		double dd = doubVar*doubVar;
+		///float*float
+		float ff = floatVar*floatVar;
+		///int*int
+		int ii = intVar*intVar;
+		///long*long
+		long ll = longVar*longVar;
+		///byte*byte
+		int bb = (int) byteVar*byteVar;
+		// printing the result of the multiplication 
+		System.out.println("the value of doubVar squared is "+dd);
+		System.out.println("the value of floatVar squared is "+ff);
+		System.out.println("the value of intVar squared is "+ii);
+		System.out.println("the value of longVar squared is "+ll);
+		System.out.println("the value of  byteVar squared is "+bb);
+		
+		
+		/////////////////////////task4
+		///////mixing types and doing multiplications to find ut the type of variable that java prints
+		////trying double and short
+		double x =  4.00000000006;
+	    short y =  20000;
+	    double xy = x*y;
+	    System.out.println(xy);
+	    ////trying double and short with a double result
+	    double x1 =  4.00000000006;
+	    short y1 =  20000;
+	    double xy1 = (int) x1*y1;
+	    System.out.println(xy1);
+	    ///trying double and short with an int result
+	    double x2 =  4.00000000006;
+	    short y2 =  20000;
+	    int xy2 = (int) x2*y2;
+	    System.out.println(xy2);
+	    ///trying float an long with a float result
+	    float x3 = (float) 4.000006;
+	    long  y3 = 20000;
+	    float xy3 =  (float)x3*y3;
+	    System.out.println(xy3);
+	    System.out.println(x3);
+	    ///trying the char data type
+	    char charVar = 'c'+1;
+	    System.out.println(charVar);
+	    char charVar1 = +1;
+	    System.out.println(charVar1);
+	    char charVar2 = +2567;
+	    System.out.println(charVar2);
+	    char charVar3 = +60000;
+	    System.out.println(charVar3);
+		
+	    ///////comments on the investigation made in task4
+	    System.out.print("");
+		
+		
+	}
+
+}

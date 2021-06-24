@@ -1,0 +1,32 @@
+package module1;
+import java.lang.Math.*;
+
+public class VectorMethods {
+  public VectorMethods() { }	
+  VectorMethods vm = new VectorMethods();
+	//////////////////task1
+	///////Will be creating a VectorMethod object using the following code
+	
+	public double Magnitude (double x) {
+		
+		double x = 2.0;
+	    double y = 3.0;
+	    double z = 5.0;
+	    double mag = vm.magnitude(x,y,z);
+	    return mag;
+		
+	    return mag;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		//VectorMethods vm = new VectorMethods();
+		
+		
+	
+
+	}
+
+}

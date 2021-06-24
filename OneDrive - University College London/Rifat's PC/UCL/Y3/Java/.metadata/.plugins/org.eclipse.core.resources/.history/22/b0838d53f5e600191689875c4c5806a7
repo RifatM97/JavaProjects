@@ -1,0 +1,45 @@
+package module1;
+import java.lang.Math.*;
+import java.util.*;
+
+///////Will be creating a VectorMethod object using the following code:
+
+public class VectorMethods {
+  public VectorMethods() { }
+  
+  
+	//////////////////task1
+	////////// A method called magnitude will be inputed to calculate
+    ///////// the magnitude of a 3D vector 
+   
+      public double magnitude (double x,double y, double z) {
+	    
+	       double mag = Math.sqrt(x*x + y*y + z*z);
+	       return mag;
+	  }
+	
+	
+	  public double dotProduct (double x, double y, double z, double x2, double y2, double z2 ) {
+		
+	       double dp = x*x2+y*y2+z*z2;
+	       return dp;
+	    
+	  }
+	  
+	  public double angle (double phi)
+
+	public static void main(String[] args) {
+		// Instantiate Simple object:
+		// explained in module 2
+		VectorMethods vm = new VectorMethods();
+		double xx = 2.0;
+		double yy = vm.magnitude(xx);
+		System.out.println("xx = "+xx);
+		System.out.println("yy = "+yy);
+	
+		
+	
+
+	}
+
+}

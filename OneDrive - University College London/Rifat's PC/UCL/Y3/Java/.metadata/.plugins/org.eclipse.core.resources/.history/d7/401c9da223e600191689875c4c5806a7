@@ -1,0 +1,114 @@
+package module1;
+
+public class DataTypes {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		///////////////////////task1
+		//// assigning a *double* variable to the value of 5.0
+		double doubVar = 5.0;
+		System.out.println("the value of doubVar is " +doubVar);
+		
+		
+		///////////////////////task2
+		////assigning "float","int","long","byte" variables to the value of 5.0
+		float floatVar = (int) 5.0;
+	    int   intVar = (int) 5.0;
+	    long  longVar = 5;
+	    byte  byteVar = 5;
+	    ///printing the assigned value and names
+	    System.out.println("the value of floatVar is " +floatVar);
+		System.out.println("the value of intVar is "  +intVar);
+		System.out.println("the value of longVar is " +longVar);
+		System.out.println("the value of byteVar is " +byteVar);
+		
+		
+		/////////////////////////task3
+		///////multiplying each of the values by itself and printing the result
+		////double*double
+		double dd = doubVar*doubVar;
+		///float*float
+		float ff = floatVar*floatVar;
+		///int*int
+		int ii = intVar*intVar;
+		///long*long
+		long ll = longVar*longVar;
+		///byte*byte
+		int bb = (int) byteVar*byteVar;
+		// printing the result of the multiplication 
+		System.out.println("the value of doubVar squared is "+dd);
+		System.out.println("the value of floatVar squared is "+ff);
+		System.out.println("the value of intVar squared is "+ii);
+		System.out.println("the value of longVar squared is "+ll);
+		System.out.println("the value of  byteVar squared is "+bb);
+		
+		
+		/////////////////////////task4
+		///////mixing types and doing multiplications to find ut the type of variable that java prints
+		////trying double and short
+		double x =  4.00000000006;
+	    short y =  20000;
+	    double xy = x*y;
+	    System.out.println(xy);
+	    ////trying double and short with a double result
+	    double x1 =  4.00000000006;
+	    short y1 =  20000;
+	    double xy1 = (int) x1*y1;
+	    System.out.println(xy1);
+	    ///trying double and short with an int result
+	    double x2 =  4.00000000006;
+	    short y2 =  20000;
+	    int xy2 = (int) x2*y2;
+	    System.out.println(xy2);
+	    ///trying float an long with a float result
+	    float x3 = (float) 4.000006;
+	    long  y3 = 20000;
+	    float xy3 =  (float)x3*y3;
+	    System.out.println(xy3);
+	    System.out.println(x3);
+	    ///trying the char data type
+	    char charVar = 'c'+1;
+	    System.out.println(charVar);
+	    char charVar1 = 'a'+1;
+	    System.out.println(charVar1);
+	    char charVar2 = 'f'-1;
+	    System.out.println(charVar2);
+	    char charVar3 = 'g'+60000;
+	    System.out.println(charVar3);
+		
+	    ///////comments on the investigation made in task4
+	    System.out.println("Task 4 required to investigate operations using different types.\n"
+	    		+ "This was done by computing calculations using the types : float, double\n"
+	    		+ "long, and int. The operation shown in the code above gave the correct\n"
+	    		+ "according to what was asked. For example, the 3rd calculation resulted\n"
+	    		+ "in a integer because the double was converted into an integer using the int variable.\n"
+	    		+ "The char variable was printed and it gave the right character for the first 3 letters,\n"
+	    		+ "however for the last one only an exclamation mark was printed. It might be that the\n"
+	    		+ "font of the langauge that it is trying to output cannot be found in this computer.");
+		
+	    
+	    /////////////////////////task5
+	    ////investigating what happens when a variable is not initialised 
+	    int j=1; 
+	    int i; 
+	    //j=i+1;
+	    /////an error appears as the variable is not initialised
+	    
+	    
+	    ////////////////////////task6
+	    
+	    double v = 4.99;
+	    int intv = (int)v;
+	    System.out.println("\nThe integer value is "+intv+" and this was\n"
+	    		+ "firstly done by creating a double variable v with value 4.99,\n"
+	    		+ "then the variable was transformed into an integer by using\n"
+	    		+ "a cast that converted the initial variable to an integer.\n"
+	    		+ "That integer value was then recalled as intv");
+	    
+	    		           
+		
+	}
+
+}

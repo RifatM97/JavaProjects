@@ -1,0 +1,200 @@
+package exam1;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+import module5.DataPoint;
+
+public class Earthquake {
+
+	private int year;
+	private int month;
+	private int day;
+	private int hr;
+	private int min;
+	private double sec;
+	private double lat;
+	private double lon;
+	private double dep;
+	private double major;
+	private double minor;
+	private double az;
+	private double deltaDep;
+	private double mag;
+	private int id;
+
+	//constructor for earthquake
+	public Earthquake() {}
+	public Earthquake(int year, int month, int day, int hr, int min, double sec,double lat,double lon,double dep, double major ,double minor, double az, double deltaDep, double mag, int id) {
+
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		this.hr = hr;
+		this.min = min;
+		this.sec = sec;
+		this.lat = lat;
+		this.lon = lon;
+		this.dep = dep;
+		this.major = major;
+		this.minor = minor;
+		this.az = az;
+		this.deltaDep = deltaDep;
+		this.mag = mag;
+		this.id = id;
+
+	}
+
+	//getters and setters
+	public double getDep() {return year;}
+	public double getdeltaDep() {return deltaDep;}
+	public double getMag() {return mag;}
+	public int getId() {return id;}
+	public int getMonth () {return this.month;}
+
+	//string
+	public String toString() {
+		return ("EQ ID: "+this.id+" |Year: "+this.year+" |Month: "+this.month+" |Day: "+this.day+" |Hour: "+this.hr+" |Minute: "+this.min+" |Second: "+this.sec+"\n|Latitude: "+this.lat
+				+" |Longitude: "+this.lon+" |Depth: "+this.dep+" |Magnitude: "+this.mag);
+	}
+
+
+	//READ THE DATA
+
+	//method that takes URL as argument and that returns a BufferedReader object
+	public static BufferedReader brFromURL(String urlName) throws Exception {
+		URL u = new URL(urlName);
+		InputStream is = u.openStream();
+		InputStreamReader isr = new InputStreamReader(is);
+		BufferedReader b = new BufferedReader(isr);
+		return b;
+	}
+
+	//method that takes URL as argument and that returns data as an array
+	public static ArrayList<Earthquake> dataFromURL(BufferedReader b) throws Exception{
+		//creating a buffered reader 
+		ArrayList <Earthquake> EQarray = new ArrayList<Earthquake>();
+		String line;
+
+		try {
+			String headerLine = b.readLine();//skips the header
+			String separator = b.readLine();//skips the dashes
+			while((line=b.readLine()) != null){
+				Scanner s = new Scanner(line);
+
+				//converts strings from file to actual numbers to be stored in arrays
+				String [] EQ = line.split("\\s+");//not sure what this line does???
+				int year = Integer.parseInt(EQ[0]);
+				int month = Integer.parseInt(EQ[1]);
+				int day = Integer.parseInt(EQ[2]);
+				int hr = Integer.parseInt(EQ[3]);
+				int min = Integer.parseInt(EQ[4]);
+				double sec = Double.parseDouble(EQ[5]);
+				double lat = Double.parseDouble(EQ[6]);
+				double lon = Double.parseDouble(EQ[7]);
+				double major = Double.parseDouble(EQ[8]);
+				double minor = Double.parseDouble(EQ[9]);
+				double az = Double.parseDouble(EQ[10]);
+				double dep = Double.parseDouble(EQ[11]);
+				double deltaDep = Double.parseDouble(EQ[12]);
+				double mag = Double.parseDouble(EQ[13]);
+				int id = Integer.parseInt(EQ[14]);
+
+				//adding each token to the array
+				Earthquake fileData = new Earthquake(year, month, day, hr, min, sec, lat,lon, major,minor,az, dep, deltaDep, mag,id);
+				EQarray.add(fileData);
+				s.close();
+			}
+		}
+		catch(Exception e) {
+			System.out.println("Something wrong with reading the file!");
+		}
+		return EQarray;
+	}
+
+	public static void main(String[] args) {
+		//initialising the variables
+		//initialising the variables
+		double minValue = Double.MAX_VALUE;
+		double maxValue = -Double.MAX_VALUE;
+		
+		
+		ArrayList <Earthquake> EQarray = new ArrayList<Earthquake>();
+		Earthquake eq =  new Earthquake();
+		
+		
+		//hashmap for each month
+		HashMap <Integer, ArrayList<Earthquake>> MonthlyEQ = new HashMap<Integer, ArrayList<Earthquake>>();
+		String [] monthsNames = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+		int [] monthList = {1,2,3,4,5,6,6,7,8,9,10,11,12};
+		
+		
+		try {
+			BufferedReader br1 = eq.brFromURL("http://www.hep.ucl.ac.uk/undergrad/3459/exam-data/2015-16/earthquakesCA1989.txt");
+			EQarray = dataFromURL(br1);
+			
+			
+			
+			int maxValueMag = 0;
+			for (int i=0; i<EQarray.size();i++) {
+				double currentMag = EQarray.get(i).getMag();
+				if (currentMag > maxValue) {
+					maxValue = currentMag;
+					maxValueMag = i;
+				}
+			}
+			Earthquake [] deepestPerMonth = new Earthquake [12];
+			Earthquake [] accuratePerMonth = new Earthquake [12];
+
+			
+			for(int month : monthList) {
+				ArrayList <Earthquake> MonthlyHigh = new ArrayList <Earthquake>();
+				double maxDepth = Double.NEGATIVE_INFINITY;
+				double minEZ = Double.POSITIVE_INFINITY;
+				for (int n=0; n<EQarray.size();n++) {
+					double currentDep = EQarray.get(n).getDep();
+					double currentdeltaDep = EQarray.get(n).getdeltaDep();
+
+					if (EQarray.get(n).getMonth()== (month)) { //if it's in the same month
+						MonthlyHigh.add(EQarray.get(n)); //add the eq to that list
+
+						if (currentDep > maxDepth) {
+							maxDepth = currentDep;
+							deepestPerMonth [month-1] = EQarray.get(n);
+						}
+
+						if (currentdeltaDep < minEZ && currentdeltaDep != -1) {
+							minEZ = currentdeltaDep;
+							accuratePerMonth [month-1] = EQarray.get(n);
+						}
+					}
+				}
+				MonthlyEQ.put(month,MonthlyHigh);
+			}
+			//Printing the results
+			System.out.println("Total no. of earthquakes : "+EQarray.size());
+			System.out.println("Earthquake with the largest magnitude:\n"+EQarray.get(maxValueMag));
+			System.out.println("------------------------------------------------------------");
+			for (int i: MonthlyEQ.keySet()) {
+				System.out.println("\nNo. of earthquakes in the Month "+i+ ": "+MonthlyEQ.get(i).size());
+				System.out.println("Deepest earthquake of the month:\n"+deepestPerMonth[(i-1)]);
+				System.out.println("Most accurately known (depth) earthquake:\n"+accuratePerMonth[i-1]+ "Error (EZ): "+accuratePerMonth[i-1].getdeltaDep());
+			}
+
+		}
+		catch(Exception e) {}
+		
+///////////////////////////Doneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee///////
+
+
+	}
+
+
+
+
+}

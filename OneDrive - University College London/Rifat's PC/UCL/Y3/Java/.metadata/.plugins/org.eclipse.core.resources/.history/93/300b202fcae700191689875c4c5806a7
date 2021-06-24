@@ -1,0 +1,21 @@
+package module1;
+
+public class AlgorithmControl {
+	public AlgorithmControl () {}
+	  
+       //////////////////task1
+       ////////// A method called loop will be coded to print integers
+
+
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		for(int i=1;i<=8;i++) {
+		System.out.println(i);		
+		
+		}
+	}
+
+
+}

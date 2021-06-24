@@ -1,0 +1,240 @@
+package exam1;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Baseball {
+
+	//initialise all variables
+	private String player;
+	private String team;
+	private String pos; //position
+	private int G; //no. of games played
+	private int AB; //no. of times player batted
+	private int R; //total no. of runs
+	private int H; //total. no of hits
+	private int B2; //2nd base
+	private int B3; //3rd base
+	private int HR; //home runs
+	private int RBI; //no. of points earned
+	private double AVG; // H/AB
+	private double OBP; //fraction he's managed to reach base
+
+
+	//constructor for baseball
+	public Baseball() {} //default constructor
+	public Baseball(String player, String team, String pos, int G, int AB, int R, int H, int B2, int B3, int HR, int RBI, double AVG, double OBP) {
+
+		this.player = player;
+		this.team = team;
+		this.pos = pos;
+		this.G = G;
+		this.AB = AB;
+		this.R = R;
+		this.H = H;
+		this.B2 = B2;
+		this.B3 = B3;
+		this.HR= HR;
+		this.RBI = RBI;
+		this.AVG = AVG;
+		this.OBP = OBP;
+
+	}
+
+	//toString()
+	@Override
+	public String toString() {
+		return "Baseball [player=" + player + ", team=" + team + ", pos=" + pos + ", G=" + G + ", AB=" + AB + ", R=" + R
+				+ ", H=" + H + ", B2=" + B2 + ", B3=" + B3 + ", HR=" + HR + ", RBI=" + RBI + ", AVG=" + AVG + ", OBP="
+				+ OBP + "]";
+	}
+
+	//getters and setters
+	public String getPlayer() {
+		return player;
+	}
+	public void setPlayer(String player) {
+		this.player = player;
+	}
+	public String getTeam() {
+		return team;
+	}
+	public void setTeam(String team) {
+		this.team = team;
+	}
+	public int getAB() {
+		return AB;
+	}
+	public void setAB(int aB) {
+		AB = aB;
+	}
+	public int getHR() {
+		return H;
+	}
+	public void setHR(int h) {
+		H = h;
+	}
+	public int getB2() {
+		return B2;
+	}
+	public void setB2(int b2) {
+		B2 = b2;
+	}
+	public int getB3() {
+		return B3;
+	}
+	public void setB3(int b3) {
+		B3 = b3;
+	}
+	public double getOBP() {
+		return OBP;
+	}
+	public void setOBP(double oBP) {
+		OBP = oBP;
+	}
+
+	//READ THE DATA
+
+	//method that takes URL as argument and that returns a BufferedReader object
+	public static BufferedReader brFromURL(String urlName) throws Exception {
+		URL u = new URL(urlName);
+		InputStream is = u.openStream();
+		InputStreamReader isr = new InputStreamReader(is);
+		BufferedReader b = new BufferedReader(isr);
+		return b;
+	}
+
+	//ARRAY
+	//method that takes URL as argument and that returns data as an array
+	public static ArrayList<Baseball> dataFromURL(BufferedReader b) throws Exception{
+		//creating a buffered reader 
+		ArrayList <Baseball> ballarray = new ArrayList<Baseball>();
+		String line;
+
+		try {
+			String headerLine = b.readLine();//skips the header
+			String blankspace = b.readLine();//skips the dashes
+			while((line=b.readLine()) != null){
+				Scanner s = new Scanner(line);
+
+				//converts strings from file to actual numbers to be stored in arrays
+				String [] ball = line.split("\\t");//splits the rows
+				String player = (ball[0]);
+				String team = (ball[1]);
+				String pos = (ball[2]);
+				int G = Integer.parseInt(ball[3]);
+				int AB = Integer.parseInt(ball[4]);
+				int R = Integer.parseInt(ball[5]);
+				int H = Integer.parseInt(ball[6]);
+				int B2 = Integer.parseInt(ball[7]);
+				int B3 = Integer.parseInt(ball[8]);
+				int HR = Integer.parseInt(ball[9]);
+				int RBI = Integer.parseInt(ball[10]);
+				double AVG = Double.parseDouble(ball[11]);
+				double OBP = Double.parseDouble(ball[12]);
+
+				//adding each token to the array
+				Baseball fileData = new Baseball(player,team,pos,G,AB,R,H,B2,B3,HR,RBI,AVG,OBP);
+				ballarray.add(fileData);
+				s.close();
+			}
+		}
+		catch(Exception e) {
+			System.out.println("Something wrong with reading the file!");
+		}
+		return ballarray;
+	}
+	
+	///HASHMAP
+	//method to print string and integer data from file
+		public static HashMap<String,String> teamNamesFromURL(BufferedReader b) throws Exception{
+			//creating a buffered reader to read URL
+			HashMap<String,String> teamNames = new HashMap<String,String>();
+			
+			//reading lines that are not empty
+			String line;
+			while((line=b.readLine()) != null){
+				Scanner s = new Scanner(line);
+				String [] teams = line.split("\\t");
+				String code = teams[0];
+				String team1 = teams[1];
+				//code and mass assigned to hash Map
+				teamNames.put(code,team1);
+				s.close();
+			}
+			return teamNames;
+		}
+		
+		public static void main(String[] args) {
+			
+			ArrayList <Baseball> ballarray = new ArrayList<Baseball>();
+			Baseball bb =  new Baseball();
+			//hashmap for each month
+			HashMap<String,String> teamNames = new HashMap<String,String>();
+			HashMap <Integer, ArrayList<Baseball>> everyTeam = new HashMap<Integer, ArrayList<Baseball>>();
+			
+			try {
+				BufferedReader br1 = bb.brFromURL("http://www.hep.ucl.ac.uk/undergrad/3459/exam_data/2016-17/MLB2001Hitting.txt");
+				ballarray = dataFromURL(br1);
+				
+				double maxValue = -Double.MAX_VALUE;
+				int mostH = 0;
+				for (int i=0; i<ballarray.size();i++) {
+					double currentMag = ballarray.get(i).getHR();
+					if (currentMag > maxValue) {
+						maxValue = currentMag;
+						mostH = i;
+					}
+				}
+				///////////////////////////////
+				////////////////////////////////
+				/*Earthquake [] deepestPerMonth = new Earthquake [12];
+				Earthquake [] accuratePerMonth = new Earthquake [12];
+
+
+				for(int month : monthList) {
+					ArrayList <Earthquake> MonthlyHigh = new ArrayList <Earthquake>();
+					double maxDepth = Double.NEGATIVE_INFINITY;
+					double minEZ = Double.POSITIVE_INFINITY;
+					for (int n=0; n<EQarray.size();n++) {
+						double currentDep = EQarray.get(n).getDep();
+						double currentdeltaDep = EQarray.get(n).getdeltaDep();
+
+						if (EQarray.get(n).getMonth()== (month)) { //if it's in the same month
+							MonthlyHigh.add(EQarray.get(n)); //add the eq to that list
+
+							if (currentDep > maxDepth) {
+								maxDepth = currentDep;
+								deepestPerMonth [month-1] = EQarray.get(n);
+							}
+
+							if (currentdeltaDep < minEZ && currentdeltaDep != -1) {
+								minEZ = currentdeltaDep;
+								accuratePerMonth [month-1] = EQarray.get(n);
+							}
+						}
+					}
+					MonthlyEQ.put(month,MonthlyHigh);
+				}*/
+				//Printing the results
+				System.out.println("Total no. of players : "+ballarray.size());
+				System.out.println("Most number of hit:\n"+ballarray.get(mostHR));
+				System.out.println("------------------------------------------------------------");
+			//	for (int i: MonthlyEQ.keySet()) {
+				//	System.out.println("\nNo. of earthquakes in the Month "+i+ ": "+MonthlyEQ.get(i).size());
+					//System.out.println("Deepest earthquake of the month:\n"+deepestPerMonth[(i-1)]);
+					//System.out.println("Most accurately known (depth) earthquake:\n"+accuratePerMonth[i-1]+ "Error (EZ): "+accuratePerMonth[i-1].getdeltaDep());
+				//}
+
+			}
+			catch(Exception e) {}
+			
+		}
+
+
+}

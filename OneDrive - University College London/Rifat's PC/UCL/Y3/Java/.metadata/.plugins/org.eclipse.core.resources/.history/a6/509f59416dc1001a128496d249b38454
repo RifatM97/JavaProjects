@@ -1,0 +1,29 @@
+package hackerranck;
+
+public class Day6 {
+	
+	 // Function to get the specific character 
+    public static char
+    getCharFromString(String s, int index) 
+    { 
+        return s.charAt(index); 
+    
+	}
+    
+    public static void main(String[] args) {
+    
+        // Get the specific character 
+        char e = getCharFromString("Hacker", 0); 
+        char e1 = getCharFromString("Hacker", 1);
+        char e2 = getCharFromString("Hacker", 2);
+        char e3 = getCharFromString("Hacker", 3);
+        char e4 = getCharFromString("Hacker", 4);
+        char e5 = getCharFromString("Hacker", 5);
+
+        
+  
+        System.out.println(e+""+e2+""+e4+" "+e1+""+e3+""+e5); 
+        
+    
+    }
+}

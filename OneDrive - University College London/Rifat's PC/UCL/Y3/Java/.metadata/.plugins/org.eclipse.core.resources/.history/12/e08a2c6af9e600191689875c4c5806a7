@@ -1,0 +1,68 @@
+package module1;
+import java.lang.Math.*;
+import java.util.*;
+
+///////Will be creating a VectorMethod object using the following code:
+
+public class VectorMethods {
+  public VectorMethods() { }
+  
+  
+	//////////////////task2
+	////////// A method called magnitude will be input to calculate
+    ///////// the magnitude of a 3D vector 
+   
+      public double magnitude (double x,double y, double z) {
+	    
+	       double mag = Math.sqrt(x*x + y*y + z*z);
+	       return mag;
+	  }
+	
+	/////////////////task1
+    ///////// A method called dotProduct will be input to calculate
+    /////////the dot product between 2 vectors  
+	  public double dotProduct (double x, double y, double z, double x2, double y2, double z2 ) {
+		
+	       double dp = x*x2+y*y2+z*z2;
+	       return dp;
+	    
+	  }
+	//////////////////task3
+	/////////////////A methhod called angle will be input to calculate 
+	/////////////////the angle between the 2 vectors
+	  public double angle (double x, double y, double z, double x2, double y2, double z2 ) {
+		  
+		   double dp1 = dotProduct(x,y,z,x2,y2,z2);
+		   double mag1 = magnitude(x,y,z);
+		   double mag2 = magnitude(x2,y2,z2);
+		   double cosphi = dp1/(mag1*mag2);
+		   double phi = Math.acos(cosphi);
+		   return phi;
+	  }
+
+	             public static void main(String[] args) {
+		         // Instantiate VectorMethod object
+		         VectorMethods vm = new VectorMethods();
+		
+		              /////defining the component of the vectors,
+	                  double x = 1;
+	                  double y = 2;
+	                  double z = 3;
+	                  double x2 = 4;
+	                  double y2 = 5;
+	                  double z2 = 6;
+	    
+	                  ///////finding the magntude of of vector 1
+		              double yy = vm.magnitude(x,y,z);
+		              System.out.println("the magnitude of vector 1 is: "+yy);
+		              
+		              //////finding the value of the dot product 
+		              //double 
+		              
+	
+		
+	
+
+	}
+
+}

@@ -1,0 +1,69 @@
+package module1;
+import java.util.Date; 
+public class MainProgram {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("HI");
+		System.out.println(" ");
+		Date myDate = new Date();
+		System.out.println(myDate);
+		System.out.println("Program finished");
+		int x = 100; int y = 200;
+		// Print the value of x
+		// to the screen
+		System.out.println(x);
+		// Prefix the printing of the
+		// value with some descriptive
+		// information:
+		System.out.println("The value of x is "+x);
+		
+		// Note the "" for any words.
+		// The + means append to the
+		// output going to the screen
+		System.out.println(" x = "+x+" and y = "+y);
+		// We can have any number of
+		// things appended using a '+' 
+		
+		
+		
+		
+		// built-in variable
+		// type declaration
+		int n; // an integer
+		float e; // a 32 bit real number
+		float E; // "e" and "E" are
+		// different variables
+		// Remember - Java is case sensitive!
+		// meaningful names make
+		// code easier to read
+		float mass, momentum; 
+		
+		
+		
+		int ix = 1234567890;
+		int iy = 10*ix; // What happens?
+		System.out.println(ix);
+		System.out.println(iy);
+		//operation doesn't work correctly beacuse it the ix intereger is large and so
+		//the following operation doesn't work
+		long ixl = 1234567890;
+		long iyl = 10*ixl; // What happens? 
+		System.out.println(ixl);
+		System.out.println(iyl);
+		
+		
+		int ix = 123456789;
+		int iy = 123456788;
+		System.out.println(ix-iy);
+		// Widening conversions
+		float fx = ix;
+		float fy = iy;
+		System.out.println(fx-fy);
+		// What happens when you make
+		// these doubles instead of floats? 
+
+		
+	}
+
+}

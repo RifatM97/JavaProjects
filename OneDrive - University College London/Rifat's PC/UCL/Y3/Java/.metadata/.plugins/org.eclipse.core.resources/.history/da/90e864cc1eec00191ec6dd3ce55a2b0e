@@ -1,0 +1,73 @@
+package module2;
+
+public class Complex {
+
+	//defining the variables
+	private double a;
+	private double b;
+
+	//setting up the constructor 
+	public Complex (double a, double b) {
+
+		this.a = a;
+		this.b = b;
+	}
+
+	//method to retrieve value of components
+	public double real() {return a;}
+	public double imag() {return b;}
+
+	//method to create modulus
+	public double modulus() {
+
+		double mod = Math.sqrt(real()*real()+imag()*imag());
+		return mod;
+	}
+
+	//method to calculate argument
+	public double angle() {
+
+		double phi = Math.atan(imag()/real());
+		return phi;
+	}
+
+	//method to find complex conjugate
+	public static Complex conjugate(Complex n1) {
+
+		double x1 = (n1.a);
+		double y1 = (n1.b)*(-1);
+		Complex com = new Complex(x1,y1);
+		return com;
+
+	}	
+
+	//method to return a complex with modulus 1.0
+	public Complex normalised() {
+		//normalising each component
+		double normx = real()/modulus();
+		double normy = imag()/modulus();
+		//creating a variable to call the normalised complex
+		Complex comp = new Complex(normx,normy);
+		return comp;
+
+	}
+
+	//boolean method 
+	public boolean equal(Complex n1) {
+		//if and only if the current Complex number is the same as that passed in the argument.
+		if ((a == n1.a) && (b == n1.b)) {
+			//true if that condition is met
+			return true;
+		}
+		//otherwise is false
+		return false;
+	}
+
+	//returning a string component of the vector to the console
+	public String toString() {
+		return("("+a+","+b+"i)");
+	}
+
+
+
+	}
